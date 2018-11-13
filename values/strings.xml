@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">شطرنج</string>
+    <!-- intro slider -->
+    <string name="hossein">حسین قجاوند</string>
+    <string name="sajjad">سجاد یزدان پرست</string>
+
+
+    <!-- playground activity -->
+    <string name="wrong_choose">مجاز به حرکت این مهره نیستید</string>
+    <string name="emptyUndo">عملی برای بازگردانی وجود ندارد</string>
+
+
+    <!-- intro slider Activity -->
+    <string name="gotit">گرفتم</string>
+    <string name="next">بعدی</string>
+    <string name="skip">رد کردن</string>
+    <string-array name="BeadsName">
+        <item name="king">شاه</item>
+        <item name="minister">وزیر</item>
+        <item name="elephant">فیل</item>
+        <item name="horse">اسب</item>
+        <item name="castle">رخ</item>
+        <item name="soldier">سرباز</item>
+    </string-array>
+    <string-array name="BeadsMove">
+        <item name="kingMove">تنها به شش خانه اطرافش میتواند حرکت کند</item>
+        <item name="ministerMove">از هر شش جهت تا قبل از رسیدن به مانع حرکت میکند</item>
+        <item name="elephantMove">تا قبل از رسیدن به مانع ضربدری حرکت میکند</item>
+        <item name="horseMove">به صورت حرف ال لاتین حرکت میکند</item>
+        <item name="castleMove">تا قبل از رسیدن به مانع در چهار جهت اصلی حرکت میکند</item>
+        <item name="soldierMove">در اولین حرکت دو خانه و درسایر حرکت ها تنها یک خانه به جلو میرود</item>
+    </string-array>
+</resources>

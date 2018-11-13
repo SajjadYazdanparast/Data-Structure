@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="highBrown">#2b2017</color>
+    <color name="lightBrown">#9a7a5e</color>
+
+
+
+    <!-- colors for introslider activity -->
+
+        <color name="_0">#820d2a</color>
+        <color name="_1">#e72767</color>
+        <color name="_2">#ef42ad</color>
+        <color name="_3">#a622be</color>
+        <color name="_4">#7926a9</color>
+        <color name="_5">#5922d1</color>
+</resources>
