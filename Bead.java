@@ -1,4 +1,4 @@
-package com.yazdanparast.sajjad.chess;
+package com.example.hossein.chess;
 
 public class Bead
 {
@@ -9,18 +9,21 @@ public class Bead
     private int id;
     private int imageId ;
     boolean first_move;
+    boolean is_kish;
 
-
-    public Bead(String color, int id, int x, int y , String name, int imageId) {
+    public Bead(String color, int id, int x, int y , String name,int imageId) {
         this.color = color;
-
         this.id = id;
         this.x = x;
         this.y = y;
         this.name = name;
         first_move = true;
         this.imageId = imageId;
+        is_kish = false;
     }
+
+
+
 
     public int getImageId() {
         return imageId;
@@ -69,14 +72,5 @@ public class Bead
 
     public void setY(int y) {
         this.y = y;
-    }
-
-
-    public boolean isFirst_move() {
-        return first_move;
-    }
-
-    public void setFirst_move(boolean first_move) {
-        this.first_move = first_move;
     }
 }
