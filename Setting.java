@@ -2,11 +2,11 @@ package com.example.hossein.chess;
 
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -14,14 +14,15 @@ public class Setting extends AppCompatActivity {
 
 
     AppCompatButton return_to_main_menu;
-    Switch music_switch;
+    CheckBox music_switch;
     SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
-        getSupportActionBar().hide();
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().hide();
 
         View decordview = getWindow().getDecorView();
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT)
@@ -38,8 +39,13 @@ public class Setting extends AppCompatActivity {
         return_to_main_menu = (AppCompatButton) findViewById(R.id.return_to_main_menu);
 
 
-        music_switch = (Switch) findViewById(R.id.song_switch);
+        music_switch = (CheckBox) findViewById(R.id.song_switch);
 
+        if(getSharedPreferences("save",MODE_PRIVATE).getString("playMusic","yes").equals("yes")){
+            music_switch.setChecked(true);
+        }
+        else
+            music_switch.setChecked(false);
         return_to_main_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

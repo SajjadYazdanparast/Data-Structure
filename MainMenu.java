@@ -4,13 +4,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatImageButton;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.Window;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -22,11 +25,10 @@ public class MainMenu extends AppCompatActivity {
     Dialog dialog;
 
     String player1_color , player2_color , player1_name , player2_name;
-    AppCompatButton player1_white_choose , player2_white_choose , player1_black_choose, player2_black_choose;
 
+    RadioButton player1_black , player1_white , player2_black , player2_white ;
 
-
-    TextInputEditText player1_name_et , player2_name_et;
+    EditText player1_name_et , player2_name_et;
 
 
 
@@ -36,9 +38,10 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menuu);
 
-        getSupportActionBar().hide();
-        player1_color = "white";
-        player2_color = "black";
+        if (getSupportActionBar()!=null)
+            getSupportActionBar().hide();
+        player1_color = "black";
+        player2_color = "white";
 
         View decordview = getWindow().getDecorView();
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT)
@@ -52,21 +55,23 @@ public class MainMenu extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
-        context = this;
 
 
-        dialog = new Dialog(context , R.style.FullHeightDialog);
-        dialog.setContentView(R.layout.ask_dialog);
+        dialog = new Dialog(MainMenu.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater li = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = li.inflate(R.layout.ask_dialog,null,false);
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
 
 
 
-        player1_name_et = (TextInputEditText) dialog.findViewById(R.id.player1_name_et);
-        player2_name_et = (TextInputEditText) dialog.findViewById(R.id.player2_name_et);
-
-        player1_white_choose = (AppCompatButton) dialog.findViewById(R.id.player1_white_choose);
-        player2_white_choose = (AppCompatButton) dialog.findViewById(R.id.player2_white_choose);
-        player1_black_choose = (AppCompatButton) dialog.findViewById(R.id.player1_black_choose);
-        player2_black_choose = (AppCompatButton) dialog.findViewById(R.id.player2_black_choose);
+        player1_name_et = (EditText) dialog.findViewById(R.id.player1_name_et);
+        player2_name_et = (EditText) dialog.findViewById(R.id.player2_name_et);
+        player1_black = (RadioButton) dialog.findViewById(R.id._1black);
+        player1_white = (RadioButton) dialog.findViewById(R.id._1white);
+        player2_black = (RadioButton) dialog.findViewById(R.id._2black);
+        player2_white = (RadioButton) dialog.findViewById(R.id._2white);
 
         start_btn = (AppCompatButton) findViewById(R.id.start_game_btn);
         setting_btn = (AppCompatButton) findViewById(R.id.setting_btn);
@@ -80,90 +85,127 @@ public class MainMenu extends AppCompatActivity {
         cancel_btn = (AppCompatButton) dialog.findViewById(R.id.cancel_btn);
 
 
-
-        player1_white_choose.setOnClickListener(new View.OnClickListener() {
+        player1_black.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                player1_color = "white";
-                player2_color = "black";
-                player1_white_choose.setEnabled(false);
-                player2_black_choose.setEnabled(false);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    player1_color = "black";
+                    player2_color = "white";
 
-                if(!player1_black_choose.isEnabled())
-                {
-                    player1_black_choose.setEnabled(true);
+                    player1_white.setChecked(false);
+                    player1_black.setChecked(true);
+
+                    player2_black.setChecked(false);
+                    player2_white.setChecked(true);
                 }
-                if(!player2_white_choose.isEnabled())
-                {
-                    player2_white_choose.setEnabled(true);
+                else{
+
+                    player1_color = "white";
+                    player2_color = "black";
+
+                    player1_black.setChecked(false);
+                    player1_white.setChecked(true);
+
+                    player2_white.setChecked(false);
+                    player2_black.setChecked(true);
                 }
             }
         });
 
-        player1_black_choose.setOnClickListener(new View.OnClickListener() {
+        player1_white.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                player1_color = "black";
-                player2_color = "white";
-                player1_black_choose.setEnabled(false);
-                player2_white_choose.setEnabled(false);
-                if(!player1_white_choose.isEnabled())
-                {
-                    player1_white_choose.setEnabled(true);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    player1_color = "white";
+                    player2_color = "black";
+
+                    player1_black.setChecked(false);
+                    player1_white.setChecked(true);
+
+                    player2_white.setChecked(false);
+                    player2_black.setChecked(true);
                 }
-                if(!player2_black_choose.isEnabled())
-                {
-                    player2_black_choose.setEnabled(true);
+                else{
+                    player1_color = "black";
+                    player2_color = "white";
+
+                    player2_black.setChecked(false);
+                    player2_white.setChecked(true);
+
+                    player1_white.setChecked(false);
+                    player1_black.setChecked(true);
                 }
             }
         });
 
-        player2_white_choose.setOnClickListener(new View.OnClickListener() {
+        player2_black.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                player2_color = "white";
-                player1_color = "black";
-                player2_white_choose.setEnabled(false);
-                player1_black_choose.setEnabled(false);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    player1_color = "white";
+                    player2_color = "black";
 
-                if(!player1_white_choose.isEnabled())
-                {
-                    player1_white_choose.setEnabled(true);
+                    player1_black.setChecked(false);
+                    player1_white.setChecked(true);
+
+                    player2_white.setChecked(false);
+                    player2_black.setChecked(true);
                 }
-                if(!player2_black_choose.isEnabled())
-                {
-                    player2_black_choose.setEnabled(true);
+                else{
+                    player1_color = "black";
+                    player2_color = "white";
+
+                    player2_black.setChecked(false);
+                    player2_white.setChecked(true);
+
+                    player1_white.setChecked(false);
+                    player1_black.setChecked(true);
                 }
             }
         });
-
-
-        player2_black_choose.setOnClickListener(new View.OnClickListener() {
+        player2_white.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                player2_color = "black";
-                player1_color = "white";
-                player2_black_choose.setEnabled(false);
-                player1_white_choose.setEnabled(false);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    player1_color = "black";
+                    player2_color = "white";
 
-                if(!player1_black_choose.isEnabled())
-                {
-                    player1_black_choose.setEnabled(true);
+                    player1_white.setChecked(false);
+                    player1_black.setChecked(true);
+
+                    player2_black.setChecked(false);
+                    player2_white.setChecked(true);
                 }
-                if(!player2_white_choose.isEnabled())
-                {
-                    player2_white_choose.setEnabled(true);
+                else{
+
+                    player1_color = "white";
+                    player2_color = "black";
+
+                    player1_black.setChecked(false);
+                    player1_white.setChecked(true);
+
+                    player2_white.setChecked(false);
+                    player2_black.setChecked(true);
                 }
             }
         });
-
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
-                player1_name = player1_name_et.getText().toString();
-                player2_name = player2_name_et.getText().toString();
-                GoPlay(v);
+                player1_name = player1_name_et.getText().toString().trim();
+                player2_name = player2_name_et.getText().toString().trim();
+                if(player1_name.isEmpty()) {
+                    player1_name_et.setError(getString(R.string.EmptyString));
+                    player1_name_et.requestFocus();
+                }
+                else if(player2_name.isEmpty()) {
+                    player2_name_et.setError(getString(R.string.EmptyString));
+                    player2_name_et.requestFocus();
+                }
+                else {
+                    dialog.dismiss();
+                    GoPlay();
+                }
             }
         });
 
@@ -209,7 +251,7 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    void GoPlay (View view)
+    void GoPlay ()
     {
 
         Intent goPlayActivity = new Intent(MainMenu.this , PlayActivity.class);

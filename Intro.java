@@ -22,8 +22,8 @@ public class Intro extends AppCompatActivity {
 
         mp = MediaPlayer.create(this , R.raw.sheyheh);
 
-
-        getSupportActionBar().hide();
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().hide();
 
 
         View decordview = getWindow().getDecorView();
@@ -71,7 +71,7 @@ public class Intro extends AppCompatActivity {
 
     public void go_to_main_menu()
     {
-        Intent goMainMenu = new Intent(Intro.this , MainMenu.class);
+        Intent goMainMenu = new Intent(Intro.this , IntroSliderActivity.class);
         this.finish();
         mp.stop();
         Intro.this.startActivity(goMainMenu);

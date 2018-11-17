@@ -1,4 +1,4 @@
-package com.yazdanparast.sajjad.chess;
+package com.example.hossein.chess;
 
 
 public class Move {
